@@ -1,14 +1,7 @@
-import React from 'react'
-import NavPage from '../components/NavPage'
-
-function PageNotFound() {
+export default function PageNotFound() {
   return (
-
     <div>
-        <NavPage/>
-        PageNotFound
+      <h1>Page not found 😢</h1>
     </div>
-  )
+  );
 }
-
-export default PageNotFound

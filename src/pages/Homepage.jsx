@@ -1,19 +1,21 @@
 import styles from "./Homepage.module.css";
-
+import { Link } from "react-router-dom";
+import NavPage from "../components/NavPage"
 export default function Homepage() {
   return (
     <main className={styles.homepage}>
+      <NavPage/>
       <section>
         <h1>
-          You travel the world.
+        Your adventure starts here!
           <br />
-          WorldWise keeps track of your adventures.
+          Traveller keeps track of your adventures.
         </h1>
         <h2>
-          A world map that tracks your footsteps into every city you can think
-          of. Never forget your wonderful experiences, and show your friends how
-          you have wandered the world.
+        Track your travels, map your adventures. A map which logs all your adventures around the world,allowing you to share
+        destinations with your friends.
         </h2>
+        <Link to="/app" className="cta">Start Your Adventure</Link>
       </section>
     </main>
   );

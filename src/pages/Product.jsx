@@ -1,8 +1,9 @@
 import styles from "./Product.module.css";
-
+import NavPage from "../components/NavPage"
 export default function Product() {
   return (
     <main className={styles.product}>
+      <NavPage/>
       <section>
         <img
           src="img-1.jpg"

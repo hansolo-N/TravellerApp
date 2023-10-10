@@ -1,8 +1,12 @@
 import React from 'react'
+import NavPage from '../components/NavPage'
 
 function Pricing() {
   return (
-    <div>Pricing</div>
+    <div>
+      <NavPage/>
+      Pricing
+      </div>
   )
 }
 

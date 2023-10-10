@@ -5,6 +5,7 @@ import Pricing from "./pages/Pricing"
 import Homepage from "./pages/Homepage"
 import PageNotFound from './pages/PageNotFound'
 
+
 function Traveller() {
 
  

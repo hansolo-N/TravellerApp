@@ -7,19 +7,20 @@ import Message from './Message'
 function CityList({cities,isLoading}) {
 console.log(cities)
 
-if(isLoading) return <Spinner/>
+if (isLoading) return <Spinner />;
 
-if(!cities.length)
-    return <Message message={'add your first your first city by clicking on some location on the map'}/>
-
-
+if (!cities.length)
   return (
-    <ul className={styles.cityList}>
-        {cities.map((city)=>
-        <CityItem key={city.id} city={city}/>
-        )}
-    </ul>
-  )
+    <Message message="Add your first city by clicking on a city on the map" />
+  );
+
+return (
+  <ul className={styles.cityList}>
+    {cities.map((city) => (
+      <CityItem city={city} key={city.id} />
+    ))}
+  </ul>
+);
 }
 
-export default CityList
+export default CityList;

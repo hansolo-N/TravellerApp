@@ -4,13 +4,13 @@ import Product from "./pages/Product"
 import Pricing from "./pages/Pricing"
 import Homepage from "./pages/Homepage"
 import CityList from './components/CityList'
+import CountryList from './components/CountryList'
 import PageNotFound from './pages/PageNotFound'
 import AppLayout from './pages/AppLayout'
 import Login from './pages/Login'
 function Traveller() {
   const [cities,setCities] = useState([])
   const [isLoading,setIsLoading] = useState(false)
-
 
 
   useEffect(function(){
@@ -37,9 +37,9 @@ function Traveller() {
           <Route path='product' element={<Product/>}/>
           <Route path='pricing' element={<Pricing/>}/>
           <Route path='app' element={<AppLayout/>}>
-            <Route index element={<CityList/>}/>
+            <Route index element={<CityList cities={cities}/>}/>
             <Route path='cities' element={<CityList cities={cities} isLoading={isLoading}/>}/>
-            <Route path='countries' element={<CityList cities={cities} isLoading={isLoading}/>}/>
+            <Route path='countries' element={<CountryList cities={cities} isLoading={isLoading}/>}/>
             <Route path='form' element={<p>form submission</p>}/>
           </Route>
           <Route path='login' element={<Login/>}/>

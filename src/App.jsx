@@ -8,7 +8,7 @@ import PageNotFound from './pages/PageNotFound'
 import AppLayout from './pages/AppLayout'
 import Login from './pages/Login'
 function Traveller() {
-  const [cities,setCities] = useState({})
+  const [cities,setCities] = useState([])
   const [isLoading,setIsLoading] = useState(false)
 
 
@@ -16,14 +16,18 @@ function Traveller() {
   useEffect(function(){
     async function fetchCities(){
       try {
+        setIsLoading(true)
         const response = await fetch("http://localhost:8000/cities")
         const data = await response.json()
-        console.log(data)
+        setCities(data)
       } catch (error) {
         console.log(error)
       }
+      finally{
+        setIsLoading(false)
+      }
     }
-    setCities(fetchCities())
+    fetchCities()
   },[])
  
   return (
@@ -34,8 +38,8 @@ function Traveller() {
           <Route path='pricing' element={<Pricing/>}/>
           <Route path='app' element={<AppLayout/>}>
             <Route index element={<CityList/>}/>
-            <Route path='cities' element={<CityList/>}/>
-            <Route path='countries' element={<p>list of countries</p>}/>
+            <Route path='cities' element={<CityList cities={cities} isLoading={isLoading}/>}/>
+            <Route path='countries' element={<CityList cities={cities} isLoading={isLoading}/>}/>
             <Route path='form' element={<p>form submission</p>}/>
           </Route>
           <Route path='login' element={<Login/>}/>

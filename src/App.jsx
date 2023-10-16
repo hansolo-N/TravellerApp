@@ -12,10 +12,12 @@ import Form from './components/Form'
 import Login from './pages/Login'
 import { CitiesProvider } from './contexts/CitiesContext'
 function Traveller() {
- 
- 
+
+
+
+
   return (
-    <CitiesProvider>
+   <CitiesProvider>
     <BrowserRouter>
         <Routes>
           <Route index element={<Homepage/>}/>
@@ -25,7 +27,7 @@ function Traveller() {
             <Route index element={<Navigate replace to="cities"/>}/>
             <Route path='cities' element={<CityList />}/>
             <Route path ='cities/:id' element={<City/>}/>
-            <Route path='countries' element={<CountryList />}/>
+            <Route path='countries' element={<CountryList/>}/>
             <Route path='form' element={<Form/>}/>
           </Route>
           <Route path='login' element={<Login/>}/>
@@ -33,6 +35,8 @@ function Traveller() {
         </Routes>
     </BrowserRouter>
     </CitiesProvider>
+
+
   )
 }
 

@@ -3,9 +3,11 @@ import styles from "./CityList.module.css"
 import Spinner from '../components/Spinner'
 import CityItem from './CityItem'
 import Message from './Message'
+import { useCities } from '../contexts/CitiesContext'
 
-function CityList({cities,isLoading}) {
-console.log(cities)
+function CityList() {
+
+const {cities,isLoading} = useCities()
 
 if (isLoading) return <Spinner />;
 

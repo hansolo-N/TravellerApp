@@ -59,7 +59,6 @@ useEffect(function(){
           Check out {cityName} on Wikipedia &rarr;
         </a>
       </div>
-
       <div>
       </div>
     </div>

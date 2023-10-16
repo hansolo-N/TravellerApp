@@ -8,6 +8,7 @@ import { useUrlCoordinates } from "../hooks/useUrlCoordinates";
 import Message from "./Message"
 import DatePicker from "react-datepicker";
 import { useCities } from "../contexts/CitiesContext";
+import { useNavigate } from "react-router-dom";
 
 export function convertToEmoji(countryCode) {
   const codePoints = countryCode
@@ -18,6 +19,7 @@ export function convertToEmoji(countryCode) {
 }
 
 function Form() {
+  const navigate = useNavigate()
   const [lat,lng] = useUrlCoordinates()
   const [cityName, setCityName] = useState("");
   const [country, setCountry] = useState("");
@@ -28,7 +30,7 @@ function Form() {
   const [geoLocationError,setGeoLocationError] = useState('')
 
   const baseUrl = "https://api.bigdatacloud.net/data/reverse-geocode-client"
-  const {postCity} = useCities()
+  const {postCity,isLoading} = useCities()
 
   useEffect(function(){
     if(!lat && !lng) return;
@@ -73,8 +75,8 @@ function Form() {
       notes,
       position :{lat,lng}
     }
-
     postCity(newCity)
+    navigate('/app/cities')
   }
 
 
@@ -86,7 +88,7 @@ function Form() {
      return <Message message ={"click somwhere on the map"}/>
   }
   return (
-    <form className={styles.form} onSubmit={()=>handleSubmit}>
+    <form className={`${styles.form} ${isLoading?styles.loading :""}`} onSubmit={handleSubmit}>
       <div className={styles.row}>
         <label htmlFor="cityName">City name</label>
         <input

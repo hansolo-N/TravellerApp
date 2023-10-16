@@ -27,13 +27,15 @@ function CitiesProvider({children}){
       async function postCity(newCity){
         try {
           setIsLoading(true)
-          const response = await fetch(`http://localhost:8000/cities/`,{
+          const response = await fetch(`http://localhost:8000/cities`,{
             method:'POST',
             body: JSON.stringify(newCity),
             headers:{
               "Content-Type":"application/json"
             }
           })
+          const data = await response.json()
+          setCities([...cities,data])
         } catch (error) {
           throw new Error("something went wrong with fetch request")
         }

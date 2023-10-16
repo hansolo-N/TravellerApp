@@ -7,6 +7,7 @@ import BackButton from "./BackButton";
 import { useUrlCoordinates } from "../hooks/useUrlCoordinates";
 import Message from "./Message"
 import DatePicker from "react-datepicker";
+import { useCities } from "../contexts/CitiesContext";
 
 export function convertToEmoji(countryCode) {
   const codePoints = countryCode
@@ -27,6 +28,7 @@ function Form() {
   const [geoLocationError,setGeoLocationError] = useState('')
 
   const baseUrl = "https://api.bigdatacloud.net/data/reverse-geocode-client"
+  const {postCity} = useCities()
 
   useEffect(function(){
     if(!lat && !lng) return;
@@ -59,6 +61,20 @@ function Form() {
   function handleSubmit(e){
     e.preventDefault()
 
+    if(!cityName || !date){
+      return;
+    }
+
+    const newCity = {
+      cityName,
+      country,
+      date,
+      emoji,
+      notes,
+      position :{lat,lng}
+    }
+
+    postCity(newCity)
   }
 
 

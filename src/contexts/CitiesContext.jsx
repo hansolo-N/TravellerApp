@@ -24,7 +24,24 @@ function CitiesProvider({children}){
         }
       }
   
-
+      async function postCity(newCity){
+        try {
+          setIsLoading(true)
+          const response = await fetch(`http://localhost:8000/cities/`,{
+            method:'POST',
+            body: JSON.stringify(newCity),
+            headers:{
+              "Content-Type":"application/json"
+            }
+          })
+        } catch (error) {
+          throw new Error("something went wrong with fetch request")
+        }
+        finally{
+          setIsLoading(false)
+        }
+      }
+  
   
     useEffect(function(){
       async function fetchCities(){
@@ -42,7 +59,7 @@ function CitiesProvider({children}){
       }
       fetchCities()
     },[])
-    return (<CitiesContext.Provider value={{cities,isLoading,currentCity,getCity}}>
+    return (<CitiesContext.Provider value={{cities,isLoading,currentCity,getCity,postCity}}>
       {children}
       </CitiesContext.Provider>)
 }

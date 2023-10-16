@@ -5,18 +5,18 @@ import { MapContainer,TileLayer,Marker,Popup, useMap, useMapEvents } from 'react
 import { useCities } from '../contexts/CitiesContext'
 import useGeoLocation from "../hooks/useGeoLocation"
 import Button from "./Button"
+import { useUrlCoordinates } from '../hooks/useUrlCoordinates'
+
+
 function Map() {
 
 
 
- const {cities} = useCities()
-
-  const [searchParams] = useSearchParams()
+  const {cities} = useCities()
   const [mapPosition,setMapPostion] = useState([40,0])
   const {isLoading:isLoadingPosition,position:geoLocationPosition,getPosition} = useGeoLocation()
-  const mapLat = searchParams.get('lat')
-  const mapLng = searchParams.get('lng')
 
+  const [mapLat,mapLng] = useUrlCoordinates()
 
   useEffect(function(){
     if(mapLat && mapLng) setMapPostion([mapLat,mapLng])

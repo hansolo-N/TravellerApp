@@ -30,9 +30,9 @@ function Map() {
 
   return (
     <div className={styles.mapContainer}>
-      <Button type= 'position' onClick={getPosition}>
+      {!geoLocationPosition &&<Button type= 'position' onClick={getPosition}>
         {isLoadingPosition? 'Loading...': "use your current position"}
-      </Button>
+      </Button>}
           <MapContainer center={mapPosition} zoom={13} scrollWheelZoom={false} className={styles.map}>
             <TileLayer
               attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'

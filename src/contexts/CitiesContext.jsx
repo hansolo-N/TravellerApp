@@ -1,12 +1,37 @@
-import { useState ,useEffect, useContext, createContext} from "react";
+import { useState ,useEffect, useContext, createContext, useReducer} from "react";
 
 
 const CitiesContext = createContext()
 
+const intitialState = {
+  cities:[],
+  isLoading: false,
+  currentCity : {}
+}
+
+function reducer(state,action){
+
+  switch(action.type){
+    case 'cities/loaded':
+      return {...state,isLoading:false,cities:action.payload}
+
+    case 'city/created':
+
+    case 'city/deleted':
+
+    default : throw new Error("dispatch fucntion not recognized")
+  } 
+
+}
+
+
 function CitiesProvider({children}){
-    const [cities,setCities] = useState([])
-    const [isLoading,setIsLoading] = useState(false)
-    const [currentCity,setCurrentCity] = useState({})
+
+    const [{cities,isLoading,currentCity},dispatch] = useReducer(reducer,intitialState)
+
+    // const [cities,setCities] = useState([])
+    // const [isLoading,setIsLoading] = useState(false)
+    // const [currentCity,setCurrentCity] = useState({})
 
 
       async function getCity(id){

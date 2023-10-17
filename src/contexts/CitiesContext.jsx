@@ -37,12 +37,34 @@ function CitiesProvider({children}){
           const data = await response.json()
           setCities([...cities,data])
         } catch (error) {
-          throw new Error("something went wrong with fetch request")
+          throw new Error("something went wrong with creating a city")
         }
         finally{
           setIsLoading(false)
         }
       }
+
+      async function deleteCity(id){
+        try {
+          setIsLoading(true)
+           await fetch(`http://localhost:8000/cities/${id}`,{
+            method:'DELETE',
+            body: JSON.stringify(),
+            headers:{
+              "Content-Type":"application/json"
+            }
+          })
+          setCities((cities)=>cities.filter(city=>city.id !==id))
+        } catch (error) {
+          throw new Error("something went wrong with deletion")
+        }
+        finally{
+          setIsLoading(false)
+        }
+      }
+
+
+
   
   
     useEffect(function(){
@@ -61,7 +83,7 @@ function CitiesProvider({children}){
       }
       fetchCities()
     },[])
-    return (<CitiesContext.Provider value={{cities,isLoading,currentCity,getCity,postCity}}>
+    return (<CitiesContext.Provider value={{cities,isLoading,currentCity,getCity,postCity,deleteCity}}>
       {children}
       </CitiesContext.Provider>)
 }

@@ -63,12 +63,9 @@ function CitiesProvider({children}){
 
     const [{cities,isLoading,currentCity},dispatch] = useReducer(reducer,intitialState)
 
-    // const [cities,setCities] = useState([])
-    // const [isLoading,setIsLoading] = useState(false)
-    // const [currentCity,setCurrentCity] = useState({})
-
-
       async function getCity(id){
+        if(id ===currentCity.id)return
+
         dispatch({type:'loading'})
         try {
           const response = await fetch(`http://localhost:8000/cities/${id}`)

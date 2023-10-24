@@ -10,6 +10,7 @@ import PageNotFound from './pages/PageNotFound'
 import AppLayout from './pages/AppLayout'
 import Form from './components/Form'
 import Login from './pages/Login'
+import SignUp from './pages/SignUp'
 import { CitiesProvider } from './contexts/CitiesContext'
 function Traveller() {
 
@@ -31,6 +32,7 @@ function Traveller() {
             <Route path='form' element={<Form/>}/>
           </Route>
           <Route path='login' element={<Login/>}/>
+          <Route path = 'signup' element={<SignUp/>}/>
           <Route path='*' element={<PageNotFound/>}/>
         </Routes>
     </BrowserRouter>

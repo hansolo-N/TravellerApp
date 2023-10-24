@@ -24,3 +24,14 @@
   flex-direction: column;
   gap: 0.5rem;
 }
+
+.signup{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.signup-link{
+  font-size: large;
+  color: white;
+}

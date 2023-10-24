@@ -1,6 +1,7 @@
 import styles from "./Login.module.css";
 import { useState } from "react";
 import NavPage from "../components/NavPage"
+import { Link } from "react-router-dom";
 export default function Login() {
   // PRE-FILL FOR DEV PURPOSES
   const [email, setEmail] = useState("jack@example.com");
@@ -30,8 +31,9 @@ export default function Login() {
           />
         </div>
 
-        <div>
+        <div className={styles.signup}>
           <button>Login</button>
+          <Link to={'/signup'}><p className={styles['signup-link']}>Dont have an account yet?</p></Link>
         </div>
       </form>
     </main>

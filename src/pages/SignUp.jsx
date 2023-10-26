@@ -55,7 +55,7 @@ export default function SignUp() {
                 type="text"
                 id="name"
                 onChange={(e) => setName(e.target.value)}
-                value={email}
+                value={Name}
               />
             </div>
 

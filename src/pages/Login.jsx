@@ -2,10 +2,34 @@ import styles from "./Login.module.css";
 import { useState } from "react";
 import NavPage from "../components/NavPage"
 import { Link } from "react-router-dom";
+import supabase from "../client/SupaClient"
+
+
 export default function Login() {
   // PRE-FILL FOR DEV PURPOSES
-  const [email, setEmail] = useState("jack@example.com");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("qwerty");
+
+  async function handleSubmit(e){
+
+    e.preventDefault()
+
+    try {
+        const { data, error } = await supabase.auth.signInWithPassword(
+            {
+              email: email,
+              password: password,
+            })
+        if(error) throw error
+        console.log(data)
+        alert("successfully logged in")
+    } catch (error) {
+       
+        alert(error)
+    }
+
+}
+
 
   return (
     <main className={styles.login}>
@@ -32,7 +56,7 @@ export default function Login() {
         </div>
 
         <div className={styles.signup}>
-          <button>Login</button>
+          <button onClick={handleSubmit}>Login</button>
           <Link to={'/signup'}><p className={styles['signup-link']}>Dont have an account yet?</p></Link>
         </div>
       </form>

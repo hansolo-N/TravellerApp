@@ -24,7 +24,7 @@ export default function SignUp() {
             return
         }
         try {
-            const { data, error } = await supabase.auth.signUp(
+            const { data, error } = await  supabase.auth.signUp(
                 {
                   email: email,
                   password: password,
@@ -36,6 +36,9 @@ export default function SignUp() {
                   }
                 }
               )
+              if(error){
+                alert(error)
+              }
               alert("check your email for verification link!")
         } catch (error) {
             alert(error)

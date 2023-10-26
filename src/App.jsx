@@ -12,12 +12,14 @@ import Form from './components/Form'
 import Login from './pages/Login'
 import SignUp from './pages/SignUp'
 import { CitiesProvider } from './contexts/CitiesContext'
+import { AuthProvider } from './contexts/AuthenticationContext'
 function Traveller() {
 
 
 
 
   return (
+    <AuthProvider>
    <CitiesProvider>
     <BrowserRouter>
         <Routes>
@@ -37,6 +39,7 @@ function Traveller() {
         </Routes>
     </BrowserRouter>
     </CitiesProvider>
+    </AuthProvider>
 
 
   )

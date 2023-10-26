@@ -4,17 +4,17 @@ const AuthContext = createContext()
 
 const initialState = {
     user: null,
-    isAuthenticated: false
+    isAuthenticated: false,
+    token: false
 }
 
 function reducer(state,action){
     switch(action.type){
         case 'login':
-            return {...state,user:action.payload,isAuthenticated:true}
+            return {...state,user:action.payload.user,isAuthenticated:action.payload.token.user.aud,token:action.payload.token}
 
         case 'logout':
             return {...initialState}
-
 
 
         default: throw new Error("reducer type not defined")
@@ -30,14 +30,13 @@ const FAKE_USER = {
   };
   
 
-export  function AuthProvider ({children}){
+function AuthProvider ({children}){
 
     const [{user,isAuthenticated},dispatch] = useReducer(reducer,initialState)
 
-    function login(email,password){
-        if( email ===FAKE_USER.email && password === FAKE_USER.password){
-            dispatch({type:"login",payload:FAKE_USER})
-        }
+    function login(token){
+            dispatch({type:"login",payload:{user:FAKE_USER,token:token}})
+        
     }
 
     function logout(){
@@ -53,6 +52,8 @@ function useAuth(){
     const context = useContext(AuthContext)
 
     if(context===undefined) throw new Error("auth context was used outside auth provider")
+
+    return context
 }
 
 export {useAuth,AuthProvider}

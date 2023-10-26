@@ -1,8 +1,10 @@
 import styles from "./Login.module.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import NavPage from "../components/NavPage"
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import supabase from "../client/SupaClient"
+import { useAuth } from "../contexts/AuthenticationContext";
+import Button from "../components/Button";
 
 
 export default function Login() {
@@ -10,9 +12,18 @@ export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("qwerty");
 
+
+  const {login,isAuthenticated} = useAuth()
+  const navigate = useNavigate()
+
+
+
   async function handleSubmit(e){
 
     e.preventDefault()
+
+
+      
 
     try {
         const { data, error } = await supabase.auth.signInWithPassword(
@@ -21,8 +32,7 @@ export default function Login() {
               password: password,
             })
         if(error) throw error
-        console.log(data)
-        alert("successfully logged in")
+        login(data)
     } catch (error) {
        
         alert(error)
@@ -30,6 +40,19 @@ export default function Login() {
 
 }
 
+// async function handleSubmit(e){
+
+//   e.preventDefault()
+
+
+// }
+
+useEffect(function(){
+  if(isAuthenticated==='authenticated') {
+    navigate("/app")
+  }
+
+},[isAuthenticated])
 
   return (
     <main className={styles.login}>
@@ -56,7 +79,7 @@ export default function Login() {
         </div>
 
         <div className={styles.signup}>
-          <button onClick={handleSubmit}>Login</button>
+          <Button onClick={handleSubmit} type="primary">Login</Button>
           <Link to={'/signup'}><p className={styles['signup-link']}>Dont have an account yet?</p></Link>
         </div>
       </form>

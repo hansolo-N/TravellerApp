@@ -8,14 +8,12 @@ export default function Product() {
       <section>
         <div>
           <h2>
-            Simple pricing.
+            Destinations
             <br />
-            Just $9/month.
+            Destinations to see
           </h2>
           <p>
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Vitae vel
-            labore mollitia iusto. Recusandae quos provident, laboriosam fugit
-            voluptatem iste.
+            list of popular destinations
           </p>
         </div>
         <img src="img-2.jpg" alt="overview of a large city with skyscrapers" />

@@ -1,25 +1,10 @@
 import styles from "./User.module.css";
-import { useAuth } from "../contexts/AuthenticationContext";
 import { useNavigate } from "react-router-dom";
 
-function User() {
-  const {user,logout} = useAuth()
-  const navigate = useNavigate()
+import React from "react";
 
-  function handleClick() {
-    logout()
-    navigate("/")
-  }
-  if(user){
-    return (
-      <div className={styles.user}>
-        <img src={user.avatar} alt={user.name} />
-        <span>Welcome, {user.name}</span>
-        <button onClick={handleClick}>Logout</button>
-      </div>
-    );
-  }
-  return ""
+function User() {
+  return <div>User</div>;
 }
 
 export default User;

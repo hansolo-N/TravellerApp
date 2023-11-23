@@ -12,15 +12,11 @@ export default function Product() {
         <div>
           <h2>About WorldWide.</h2>
           <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo est
-            dicta illum vero culpa cum quaerat architecto sapiente eius non
-            soluta, molestiae nihil laborum, placeat debitis, laboriosam at fuga
-            perspiciatis?
+          Preserve memories: The app helps users to preserve their travel memories by storing them in a central location.
+          Inspire others: Users' travel logs can inspire others to travel to new places and experience new things.
           </p>
           <p>
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Corporis
-            doloribus libero sunt expedita ratione iusto, magni, id sapiente
-            sequi officiis et.
+          Overall, your travelling application has the potential to be a valuable tool for travelers of all kinds. It is easy to use, provides a variety of useful features, and offers a number of benefits to users.
           </p>
         </div>
       </section>

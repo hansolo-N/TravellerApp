@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import FormRow from "../ui/FormRow";
 import Input from "../ui/Input";
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 
 const LoginContainer = styled.div`
   display: flex;
@@ -15,10 +16,17 @@ const LoginContainer = styled.div`
 function LoginForm() {
   const { register, formState, handleSubmit } = useForm();
 
+  const navigate = useNavigate();
+
   const { errors } = formState;
 
   function onSubmit(data) {
     console.log(data);
+  }
+
+  function handleSignUp(e) {
+    e.preventDefault();
+    navigate("/signup");
   }
 
   return (
@@ -41,6 +49,9 @@ function LoginForm() {
         </FormRow>
         <FormRow>
           <button>Login</button>
+        </FormRow>
+        <FormRow>
+          <button onClick={handleSignUp}>SignUp</button>
         </FormRow>
       </Form>
     </LoginContainer>

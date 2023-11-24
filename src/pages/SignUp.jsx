@@ -1,66 +1,65 @@
 import styles from "./Login.module.css";
-import { useState } from "react";
 import NavPage from "../components/NavPage";
-import supabase from "../client/SupaClient";
+import Button from "../components/StyledButton";
+import Form from "../ui/Form";
+import FormRow from "../ui/FormRow";
+import Input from "../ui/Input";
+import { useForm } from "react-hook-form";
+import { useSignUpUser } from "../hooks/useSignUpUser";
 
 export default function SignUp() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirm, setConfirm] = useState("");
-  const [Name, setName] = useState("");
+  const { register, formState, handleSubmit, reset } = useForm();
 
-  async function handleSubmit(e) {
-    e.preventDefault();
+  const { signUp, isLoading } = useSignUpUser();
+
+  const { errors } = formState;
+
+  function onSubmit({ email, password, fullName }) {
+    signUp({ email, password, fullName });
   }
 
   return (
     <main className={styles.login}>
       <NavPage />
-      <form className={styles.form}>
-        <div className={styles.row}>
-          <label htmlFor="name">Name</label>
-          <input
+      <Form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
+        <FormRow label="full Name" className={styles.row}>
+          <Input
             type="text"
-            id="name"
-            onChange={(e) => setName(e.target.value)}
-            value={Name}
+            id="fullName"
+            {...register("fullName", { required: "this field is required" })}
           />
-        </div>
+        </FormRow>
 
-        <div className={styles.row}>
-          <label htmlFor="email">Email address</label>
-          <input
+        <FormRow label="email" className={styles.row}>
+          <Input
             type="email"
             id="email"
-            onChange={(e) => setEmail(e.target.value)}
-            value={email}
+            {...register("email", { required: "this field is required" })}
           />
-        </div>
+        </FormRow>
 
-        <div className={styles.row}>
-          <label htmlFor="password">Password</label>
-          <input
+        <FormRow label="password" className={styles.row}>
+          <Input
             type="password"
             id="password"
-            onChange={(e) => setPassword(e.target.value)}
-            value={password}
+            {...register("password", { required: "this field is required" })}
           />
-        </div>
+        </FormRow>
 
-        <div className={styles.row}>
-          <label htmlFor="password">Confirm Password</label>
-          <input
+        <FormRow label="passwordConfirm" className={styles.row}>
+          <Input
             type="password"
-            id="Confirm"
-            onChange={(e) => setConfirm(e.target.value)}
-            value={confirm}
+            id="passwordConfirm"
+            {...register("passwordConfirm", {
+              required: "this field is required",
+            })}
           />
-        </div>
+        </FormRow>
 
-        <div>
-          <button onClick={(e) => handleSubmit(e)}>Sign Up</button>
-        </div>
-      </form>
+        <FormRow>
+          <Button onClick={handleSubmit}>Sign Up</Button>
+        </FormRow>
+      </Form>
     </main>
   );
 }

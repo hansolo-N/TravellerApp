@@ -1,7 +1,6 @@
 import { React, useEffect, useState } from "react";
 import styles from "./Map.module.css";
 import { useNavigate } from "react-router-dom";
-import { useCities } from "../contexts/CitiesContext";
 import useGeoLocation from "../hooks/useGeoLocation";
 import Button from "./Button";
 import { useUrlCoordinates } from "../hooks/useUrlCoordinates";

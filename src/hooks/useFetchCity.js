@@ -1,15 +1,15 @@
-import { useMutation } from "@tanstack/react-query";
-import { getCity as getCityApi } from "../services/cityApi";
-import toast from "react-hot-toast";
+import { useQuery } from "@tanstack/react-query";
+import { getCity } from "../services/cityApi";
 
-export function useFetchCity() {
-  const { mutate: getCity, isLoading: isLoadingCity } = useMutation({
-    mutationFn: getCityApi,
-    onError: (err) => {
-      console.log("error:", err);
-      toast.error("there was an error fetching city");
-    },
+export function useFetchCity(id) {
+  const {
+    isLoading,
+    data: city,
+    error,
+  } = useQuery({
+    queryKey: ["city"],
+    queryFn: () => getCity(id),
+    retry: false,
   });
-
-  return { getCity, isLoadingCity };
+  return { isLoading, error, city };
 }

@@ -11,7 +11,6 @@ export async function getCity(id) {
     console.error(error);
     throw new Error("city not found");
   }
-  console.log(id);
   return data;
 }
 
@@ -37,7 +36,6 @@ export async function updateCurrentCity(city) {
     console.error(error);
     throw new Error("current city could not be updated");
   }
-  console.log(city);
   return data;
 }
 
@@ -64,7 +62,16 @@ export async function postCity(newCity) {
     console.log(error);
     throw new Error("could not add city");
   }
-  console.log(newCity);
   updateCurrentCity(newCity);
+  return data;
+}
+
+export async function deleteCity(id) {
+  const { data, error } = await supabase.from("cities").delete().eq("id", id);
+
+  if (error) {
+    console.error(error);
+    throw new Error("city not found");
+  }
   return data;
 }

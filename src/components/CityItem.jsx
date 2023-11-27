@@ -1,7 +1,8 @@
 import { Link } from "react-router-dom";
-import { useCities } from "../contexts/CitiesContext";
+// import { useCities } from "../contexts/CitiesContext";
 import styles from "./CityItem.module.css";
-import { useFetchCity } from "../hooks/useFetchCity";
+import { getCurrentCity } from "../services/cityApi";
+import { useDeleteCity } from "../hooks/useDeleteCity";
 
 const formatDate = (date) =>
   new Intl.DateTimeFormat("en", {
@@ -11,23 +12,25 @@ const formatDate = (date) =>
   }).format(new Date(date));
 
 function CityItem({ city }) {
-  const { currentCity, deleteCity } = useCities();
+  // const { currentCity, deleteCity } = useCities();
 
-  // const { city: fetchedCity, isLoading } = useFetchCity(city.id);
+  const { currentCity } = getCurrentCity();
 
   const { cityName, emoji, date, id, position } = city;
 
+  const { deleteCity, deletingCity } = useDeleteCity();
+
   function handleClick(e) {
     e.preventDefault();
-    // deleteCity(id);
+    deleteCity(id);
   }
 
   return (
     <li>
       <Link
-        className={`${styles.cityItem} ${
-          id === currentCity.id ? styles["cityItem--active"] : ""
-        }`}
+        // className={`${styles.cityItem} ${
+        //   id === currentCity.id ? styles["cityItem--active"] : ""
+        // }`}
         to={`${id}?lat=${position.lat}&lng=${position.lng}`}
       >
         <span className={styles.emoji}>{emoji}</span>
@@ -38,7 +41,7 @@ function CityItem({ city }) {
         </button>
       </Link>
     </li>
-    // <h1>hello</h1>
+    // <h1>{cityName}</h1>
   );
 }
 

@@ -13,7 +13,7 @@ export function useLogin() {
     mutationKey: ["login"],
     onSuccess: (user) => {
       queryClient.setQueriesData(["user"], user);
-      navigate("/dashboard", { replace: true });
+      navigate("/app", { replace: true });
     },
     onError: (err) => {
       console.log("Error", err);

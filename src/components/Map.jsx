@@ -14,6 +14,7 @@ import {
   useMap,
   useMapEvents,
 } from "react-leaflet";
+import { useFetchCities } from "../hooks/useFetchCities";
 
 const StyledMapContainer = styled.div`
   flex: 1;
@@ -23,7 +24,10 @@ const StyledMapContainer = styled.div`
 `;
 
 function Map() {
-  const { cities } = useCities();
+  // const { cities } = useCities();
+
+  const { cities, isLoading } = useFetchCities();
+
   const [mapPosition, setMapPostion] = useState([40, 0]);
   const {
     isLoading: isLoadingPosition,
@@ -65,19 +69,20 @@ function Map() {
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png"
         />
-        {cities.map((city) => (
-          <Marker
-            position={[city.position.lat, city.position.lng]}
-            key={city.id}
-          >
-            <Popup>
-              <span>
-                {city.emoji}
-                <span>{city.cityName}</span>
-              </span>
-            </Popup>
-          </Marker>
-        ))}
+        {!isLoading &&
+          cities.map((city) => (
+            <Marker
+              position={[city.position.lat, city.position.lng]}
+              key={city.id}
+            >
+              <Popup>
+                <span>
+                  {city.emoji}
+                  <span>{city.cityName}</span>
+                </span>
+              </Popup>
+            </Marker>
+          ))}
 
         <ChangeCenter position={mapPosition} />
         <RegisterClick />

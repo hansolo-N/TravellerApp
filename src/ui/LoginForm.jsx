@@ -5,6 +5,7 @@ import FormRow from "../ui/FormRow";
 import Input from "../ui/Input";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
+import { useLogin } from "../hooks/useLogin";
 
 const LoginContainer = styled.div`
   display: flex;
@@ -14,14 +15,16 @@ const LoginContainer = styled.div`
 `;
 
 function LoginForm() {
+  const { login, isLoading } = useLogin();
+
   const { register, formState, handleSubmit } = useForm();
 
   const navigate = useNavigate();
 
   const { errors } = formState;
 
-  function onSubmit(data) {
-    console.log(data);
+  function onSubmit({ password, email }) {
+    login({ password, email });
   }
 
   function handleSignUp(e) {

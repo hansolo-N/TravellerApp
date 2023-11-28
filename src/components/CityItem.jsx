@@ -26,25 +26,26 @@ function CityItem({ city }) {
 
   return (
     <li>
-      <Link
-        // className={`${styles.cityItem} ${
-        //   id === currentCity.id ? styles["cityItem--active"] : ""
-        // }`}
-        to={`${id}?lat=${position.lat}&lng=${position.lng}`}
-      >
-        <span className={styles.emoji}>{emoji}</span>
-        <h3 className={styles.name}>{cityName}</h3>
-        <time className={styles.date}>({formatDate(date)})</time>
-        <button
-          className={styles.deleteBtn}
-          onClick={handleClick}
-          disabled={deletingCity}
+      {currentCity && (
+        <Link
+          className={`${styles.cityItem} ${
+            id === currentCity.currentCity_id ? styles["cityItem--active"] : ""
+          }`}
+          to={`${id}?lat=${position.lat}&lng=${position.lng}`}
         >
-          &times;
-        </button>
-      </Link>
+          <span className={styles.emoji}>{emoji}</span>
+          <h3 className={styles.name}>{cityName}</h3>
+          <time className={styles.date}>({formatDate(date)})</time>
+          <button
+            className={styles.deleteBtn}
+            onClick={handleClick}
+            disabled={deletingCity}
+          >
+            &times;
+          </button>
+        </Link>
+      )}
     </li>
-    // <h1>{cityName}</h1>
   );
 }
 

@@ -1,5 +1,4 @@
 import supabase from "../client/SupaClient";
-import { getDate, formattedDate } from "../utils/date";
 
 export async function getCity(id) {
   const { data, error } = await supabase
@@ -12,7 +11,7 @@ export async function getCity(id) {
     console.error(error);
     throw new Error("city not found");
   }
-  updateCurrentCity(data);
+  updateCurrentCity({ ...data, id: 1, currentCity_id: data.id });
   return data;
 }
 
@@ -29,11 +28,9 @@ export async function getCities() {
 export async function updateCurrentCity(city) {
   const { data, error } = await supabase
     .from("currentCity")
-    .update(city)
-    // There is only ONE row of settings, and it has the ID=1, and so this is the updated one
+    .update({ ...city, id: 1 })
     .eq("id", 1)
     .single();
-
   if (error) {
     console.error(error);
     throw new Error("current city could not be updated");
@@ -46,7 +43,6 @@ export async function getCurrentCity() {
     .from("currentCity")
     .select("*")
     .single();
-
   if (error) {
     console.error(error);
     throw new Error("current city could not be loaded");
@@ -64,8 +60,7 @@ export async function postCity(newCity) {
     console.log(error);
     throw new Error("could not add city");
   }
-  console.log(Date.now());
-  updateCurrentCity({ ...newCity, currentCity_id: data.at(0).id });
+  updateCurrentCity({ ...newCity, id: 1, currentCity_id: data.at(0).id });
   return data;
 }
 
@@ -77,14 +72,15 @@ export async function deleteCity(id) {
     throw new Error("city not found");
   }
   //this needs fixing
-  updateCurrentCity({
-    cityName: "",
-    country: "",
-    date: null || "2023-01-01 00:00:00+00:00",
-    emoji: "",
-    position: {},
-    notes: "",
-    currentCity_id: 0,
-  });
+  // updateCurrentCity({
+  //   cityName: "",
+  //   country: "",
+  //   date: null || "2023-01-01 00:00:00+00:00",
+  //   emoji: "",
+  //   position: {},
+  //   notes: "",
+  //   currentCity_id: 0,
+  //   created_at: "2023-01-01 00:00:00+00:00",
+  // });
   return data;
 }

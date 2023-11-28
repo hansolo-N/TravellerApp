@@ -91,7 +91,7 @@ function Form() {
   }
 
   if (!lat && !lng) {
-    return <Message message={"click somwhere on the map"} />;
+    return <Message message={"click somewhere on the map"} />;
   }
   return (
     <form

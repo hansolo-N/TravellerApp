@@ -1,4 +1,5 @@
 import supabase from "../client/SupaClient";
+import { getDate, formattedDate } from "../utils/date";
 
 export async function getCity(id) {
   const { data, error } = await supabase
@@ -11,6 +12,7 @@ export async function getCity(id) {
     console.error(error);
     throw new Error("city not found");
   }
+  updateCurrentCity(data);
   return data;
 }
 
@@ -62,7 +64,8 @@ export async function postCity(newCity) {
     console.log(error);
     throw new Error("could not add city");
   }
-  updateCurrentCity(newCity);
+  console.log(Date.now());
+  updateCurrentCity({ ...newCity, currentCity_id: data.at(0).id });
   return data;
 }
 
@@ -73,5 +76,15 @@ export async function deleteCity(id) {
     console.error(error);
     throw new Error("city not found");
   }
+  //this needs fixing
+  updateCurrentCity({
+    cityName: "",
+    country: "",
+    date: null || "2023-01-01 00:00:00+00:00",
+    emoji: "",
+    position: {},
+    notes: "",
+    currentCity_id: 0,
+  });
   return data;
 }

@@ -15,6 +15,7 @@ import Profile from "./pages/Profile";
 import { CitiesProvider } from "./contexts/CitiesContext";
 import ProtectedRoute from "./pages/ProtectedRoute";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { Toaster } from "react-hot-toast";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -53,6 +54,26 @@ function Traveller() {
             <Route path="*" element={<PageNotFound />} />
           </Routes>
         </BrowserRouter>
+        <Toaster
+          position="top-center"
+          gutter={12}
+          containerStyle={{ margin: "8px" }}
+          toastOptions={{
+            success: {
+              duration: 3000,
+            },
+            error: {
+              duration: 3000,
+            },
+            style: {
+              fontSize: "16px",
+              maxWidth: "500px",
+              padding: "16px 24px",
+              backgroundColor: "var(--color-dark--0)",
+              color: "var(--color-grey-700)",
+            },
+          }}
+        />
       </CitiesProvider>
     </QueryClientProvider>
   );

@@ -15,6 +15,8 @@ import ProtectedRoute from "./pages/ProtectedRoute";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "react-hot-toast";
 import DestinationLayout from "./pages/DestinationLayout";
+import DestinationForm from "./components/DestinationForm";
+import Destinations from "./pages/Destinations";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -32,8 +34,9 @@ function Traveller() {
         <Routes>
           <Route index element={<Homepage />} />
           <Route path="about" element={<Product />} />
-          <Route path="destination" element={<DestinationLayout />}>
-            <Route path="form" element={<Form />} />
+          <Route path="destinations" element={<DestinationLayout />}>
+            <Route path="destination" element={<Destinations />} />
+            <Route path="destinationform" element={<DestinationForm />} />
           </Route>
           <Route
             path="app"

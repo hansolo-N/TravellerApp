@@ -8,7 +8,7 @@ function NavPage() {
       <Logo />
       <ul>
         <li>
-          <NavLink to="/destination">Destinations</NavLink>
+          <NavLink to="/destinations">Destinations</NavLink>
         </li>
         <li>
           <NavLink to="/about">About</NavLink>

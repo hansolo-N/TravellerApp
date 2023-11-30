@@ -2,6 +2,7 @@ import React from "react";
 import DestinationSidebar from "../components/DestinationSidebar";
 import DestinationNav, { ListItem } from "../ui/DestinationNav";
 import { HiOutlineGlobe } from "react-icons/hi";
+import { HiOutlinePaperAirplane } from "react-icons/hi2";
 import styled from "styled-components";
 import Logo from "../components/Logo";
 import { NavLink, Outlet } from "react-router-dom";
@@ -20,7 +21,7 @@ function DestinationLayout() {
         <Logo />
         <Outlet />
         <DestinationNav>
-          <ListItem linkname="flights" />
+          <ListItem linkname="flights" icon={<HiOutlinePaperAirplane />} />
           <ListItem linkname="Destinations" icon={<HiOutlineGlobe />} />
         </DestinationNav>
       </DestinationSidebar>

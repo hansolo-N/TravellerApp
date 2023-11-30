@@ -1,8 +1,10 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useRef, useState } from "react";
 import styled, { css } from "styled-components";
+import TopCityList from "./TopCityList";
 
 //color-main: #087f5b
 //grey color: #343a40
+// #ffc300
 
 const ParagraphStyles = {
   large: css`
@@ -42,6 +44,11 @@ const StyledImage = styled.img`
   border-radius: 8px;
   transform: scale(1.1);
   box-shadow: 0px 12px 24px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s;
+
+  &:hover {
+    transform: scale(1.4);
+  }
 `;
 
 const StyledBlockQoute = styled.blockquote``;
@@ -62,6 +69,7 @@ const StyledArrowButton = styled.button`
   justify-content: center;
   position: absolute;
   color: #087f5b;
+  transition: all 0.2s ease-in-out;
 
   ${(props) =>
     props.type === "left" &&
@@ -76,19 +84,46 @@ const StyledArrowButton = styled.button`
       right: 0;
       transform: translate(50%, -50%);
     `}
+
+    &:hover {
+    background-color: #c70039;
+    color: white;
+  }
 `;
 
 const CarouselContext = createContext();
 
 function Carousel({ children }) {
   const [index, setIndex] = useState(0);
-
   console.log(index);
 
+  let intervalId = useRef(null);
+
+  useEffect(() => {
+    //Implementing the setInterval method
+    intervalId.current = setInterval(() => {
+      if (index === 9) {
+        setIndex(0);
+        return () => clearInterval(intervalId.current);
+      }
+      setIndex((index) => index + 1);
+    }, 5000);
+
+    //Clearing the interval
+    return () => clearInterval(intervalId.current);
+  }, [index]);
+
   function tab(type) {
+    clearInterval(intervalId.current);
     if (type === "left") {
-      if (index > 0) setIndex((index) => index - 1);
+      if (index < 0) {
+        setIndex(9);
+      }
+      setIndex((index) => index - 1);
     } else if (type === "right") {
+      if (index >= 9) {
+        setIndex(0);
+      }
       setIndex((index) => index + 1);
     }
   }
@@ -116,6 +151,19 @@ function ArrowButton({ icon, type }) {
 
 Carousel.ArrowButton = ArrowButton;
 
-export default Carousel;
+function useCarousel() {
+  const context = useContext(CarouselContext);
+  if (context === undefined) {
+    console.log("context undefined");
+    throw new Error("carousel context was used outside cities provider");
+  }
+  return context;
+}
 
-export { StyledBlockQoute, StyledImage, StyledParagraph };
+export {
+  StyledBlockQoute,
+  StyledImage,
+  StyledParagraph,
+  Carousel,
+  useCarousel,
+};

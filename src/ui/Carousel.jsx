@@ -1,4 +1,11 @@
-import { createContext, useContext, useEffect, useRef, useState } from "react";
+import {
+  createContext,
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+  useCallback,
+} from "react";
 import styled, { css } from "styled-components";
 import TopCityList from "./TopCityList";
 
@@ -26,8 +33,11 @@ const ParagraphStyles = {
 };
 
 const StyledCarousel = styled.div`
-  background-color: #087f5b;
+  display: flex;
+  gap: 2rem;
+  background-color: #c8d9eb;
   width: 800px;
+  height: 400px;
   margin: 100px auto;
   border-radius: 8px;
   color: #fff;
@@ -38,6 +48,7 @@ const StyledCarousel = styled.div`
   align-items: center;
   gap: 64px;
   position: relative;
+  z-index: 0;
 `;
 const StyledImage = styled.img`
   height: 250px;
@@ -51,7 +62,19 @@ const StyledImage = styled.img`
   }
 `;
 
-const StyledBlockQoute = styled.blockquote``;
+const StyledBlockQoute = styled.blockquote`
+  display: flex;
+  flex-direction: column;
+  transition: all 0.3s;
+  color: black;
+  &:hover {
+    transform: scale(1.1) translateX(90px) translateY(-50px);
+    cursor: pointer;
+    font-size: 16px;
+    z-index: 4;
+    color: #ffc300;
+  }
+`;
 
 const StyledParagraph = styled.p`
   ${(props) => ParagraphStyles[props.paragraphstyle]}
@@ -70,6 +93,7 @@ const StyledArrowButton = styled.button`
   position: absolute;
   color: #087f5b;
   transition: all 0.2s ease-in-out;
+  z-index: 3;
 
   ${(props) =>
     props.type === "left" &&
@@ -88,6 +112,8 @@ const StyledArrowButton = styled.button`
     &:hover {
     background-color: #c70039;
     color: white;
+    position: absolute;
+    right: 0;
   }
 `;
 
@@ -95,12 +121,13 @@ const CarouselContext = createContext();
 
 function Carousel({ children }) {
   const [index, setIndex] = useState(0);
-  console.log(index);
+  const [isHovering, setIsHovering] = useState(false);
 
   let intervalId = useRef(null);
 
-  useEffect(() => {
-    //Implementing the setInterval method
+  console.log(isHovering);
+
+  const startInterval = useCallback(() => {
     intervalId.current = setInterval(() => {
       if (index === 9) {
         setIndex(0);
@@ -110,8 +137,24 @@ function Carousel({ children }) {
     }, 5000);
 
     //Clearing the interval
-    return () => clearInterval(intervalId.current);
-  }, [index]);
+  }, [index, intervalId]);
+
+  function stopInterval() {
+    if (intervalId.current) {
+      clearInterval(intervalId.current);
+      intervalId.current = null;
+    }
+  }
+
+  const HandleMouseEnter = () => {
+    setIsHovering(true);
+    stopInterval();
+  };
+
+  const HandleMouseLeave = () => {
+    setIsHovering(false);
+    if (isHovering) startInterval();
+  };
 
   function tab(type) {
     clearInterval(intervalId.current);
@@ -127,10 +170,19 @@ function Carousel({ children }) {
       setIndex((index) => index + 1);
     }
   }
+  useEffect(() => {
+    startInterval();
+    return () => stopInterval();
+  }, [startInterval, index]);
 
   return (
     <CarouselContext.Provider value={{ index, tab }}>
-      <StyledCarousel>{children}</StyledCarousel>
+      <StyledCarousel
+        onMouseEnter={HandleMouseEnter}
+        onMouseLeave={HandleMouseLeave}
+      >
+        {children}
+      </StyledCarousel>
     </CarouselContext.Provider>
   );
 }

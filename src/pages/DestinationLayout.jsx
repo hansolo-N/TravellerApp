@@ -7,6 +7,8 @@ import styled from "styled-components";
 import Logo from "../components/Logo";
 import { NavLink, Outlet } from "react-router-dom";
 import Destinations from "./Destinations";
+import MainPage from "../ui/MainPage";
+import { Header } from "../ui/MainPage";
 
 const StyledLayout = styled.div`
   display: grid;
@@ -25,10 +27,10 @@ function DestinationLayout() {
           <ListItem linkname="Destinations" icon={<HiOutlineGlobe />} />
         </DestinationNav>
       </DestinationSidebar>
-
-      <DestinationSidebar>
+      <MainPage>
+        <Header>Destinations</Header>
         <Destinations />
-      </DestinationSidebar>
+      </MainPage>
     </StyledLayout>
   );
 }

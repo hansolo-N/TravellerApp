@@ -1,20 +1,15 @@
 import React from "react";
 import DestinationSidebar from "../components/DestinationSidebar";
-import { HiChevronLeft } from "react-icons/hi";
-import { HiChevronRight } from "react-icons/hi";
-import PointsOfInterestMap from "../ui/PointsOfInterestMap";
-import Carousel, {
-  StyledBlockQoute,
-  StyledImage,
-  StyledParagraph,
-} from "../ui/Carousel";
+import DestinationNav, { ListItem } from "../ui/DestinationNav";
+import { HiOutlineGlobe } from "react-icons/hi";
 import styled from "styled-components";
 import Logo from "../components/Logo";
-import { Outlet } from "react-router-dom";
+import { NavLink, Outlet } from "react-router-dom";
+import Destinations from "./Destinations";
 
 const StyledLayout = styled.div`
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 200px 2fr;
   height: 100vh;
 `;
 
@@ -24,17 +19,15 @@ function DestinationLayout() {
       <DestinationSidebar>
         <Logo />
         <Outlet />
+        <DestinationNav>
+          <ListItem linkname="flights" />
+          <ListItem linkname="Destinations" icon={<HiOutlineGlobe />} />
+        </DestinationNav>
       </DestinationSidebar>
-      {/* <PointsOfInterestMap /> */}
-      <Carousel>
-        <StyledImage src="bg.jpg" alt="image not found" />
-        <StyledBlockQoute>
-          <StyledParagraph>test</StyledParagraph>
-          <StyledParagraph>test</StyledParagraph>
-        </StyledBlockQoute>
-        <Carousel.ArrowButton type="left" icon={<HiChevronLeft />} />
-        <Carousel.ArrowButton type="right" icon={<HiChevronRight />} />
-      </Carousel>
+
+      <DestinationSidebar>
+        <Destinations />
+      </DestinationSidebar>
     </StyledLayout>
   );
 }

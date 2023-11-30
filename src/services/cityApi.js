@@ -84,3 +84,16 @@ export async function deleteCity(id) {
   // });
   return data;
 }
+
+export async function fetchTopCities() {
+  const { data, error } = await supabase.from("TopCities").select("*");
+
+  if (error) {
+    console.log(error);
+    throw new Error(
+      "there was a problem fetching the top Cities in the world!"
+    );
+  }
+
+  return data;
+}

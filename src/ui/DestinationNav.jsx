@@ -45,7 +45,7 @@ const StyledListItem = styled.li`
   &:hover {
     transform: translateY(1px);
     transform: translateX(0);
-    background-color: red;
+    background-color: #00c46a;
   }
 `;
 

@@ -8,7 +8,7 @@ const StyledTopCity = styled.div`
   animation-duration: 5.5s;
   animation-delay: 1s;
   animation-iteration-count: infinite;
-  z-index: 0;
+  z-index: -1;
   @keyframes moveIn {
     0% {
       transform: translate(-40px);

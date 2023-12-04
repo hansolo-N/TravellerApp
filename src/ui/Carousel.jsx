@@ -56,9 +56,11 @@ const StyledImage = styled.img`
   transform: scale(1.1);
   box-shadow: 0px 12px 24px rgba(0, 0, 0, 0.1);
   transition: all 0.3s;
-
+  z-index: -1;
   &:hover {
     transform: scale(1.4);
+    z-index: 0;
+    cursor: pointer;
   }
 `;
 
@@ -93,13 +95,13 @@ const StyledArrowButton = styled.button`
   position: absolute;
   color: #087f5b;
   transition: all 0.2s ease-in-out;
-  z-index: 3;
 
   ${(props) =>
     props.type === "left" &&
     css`
       left: 0;
       transform: translate(-50%, -50%);
+      z-index: -1;
     `}
 
   ${(props) =>
@@ -107,6 +109,7 @@ const StyledArrowButton = styled.button`
     css`
       right: 0;
       transform: translate(50%, -50%);
+      z-index: -1;
     `}
 
     &:hover {
@@ -125,7 +128,7 @@ function Carousel({ children }) {
 
   let intervalId = useRef(null);
 
-  console.log(isHovering);
+  console.log(index);
 
   const startInterval = useCallback(() => {
     intervalId.current = setInterval(() => {
@@ -164,7 +167,7 @@ function Carousel({ children }) {
       }
       setIndex((index) => index - 1);
     } else if (type === "right") {
-      if (index >= 9) {
+      if (index === 9) {
         setIndex(0);
       }
       setIndex((index) => index + 1);

@@ -5,7 +5,7 @@ import { HiOutlineGlobe } from "react-icons/hi";
 import { HiOutlinePaperAirplane } from "react-icons/hi2";
 import styled from "styled-components";
 import Logo from "../components/Logo";
-import { NavLink, Outlet } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import Destinations from "./Destinations";
 import MainPage from "../ui/MainPage";
 import { Header } from "../ui/MainPage";

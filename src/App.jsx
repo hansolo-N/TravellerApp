@@ -1,6 +1,6 @@
 import React from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import Product from "./pages/Product";
+import About from "./pages/About";
 import Homepage from "./pages/Homepage";
 import City from "./components/City";
 import CityList from "./components/CityList";
@@ -33,7 +33,7 @@ function Traveller() {
       <BrowserRouter>
         <Routes>
           <Route index element={<Homepage />} />
-          <Route path="about" element={<Product />} />
+          <Route path="about" element={<About />} />
           <Route path="destinations" element={<DestinationLayout />}>
             <Route path="destination" element={<Destinations />} />
             <Route path="destinationform" element={<DestinationForm />} />

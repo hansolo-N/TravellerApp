@@ -103,8 +103,6 @@ const Sidebar = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* justify-content: center; */
-  justify-content: space-evenly;
 `;
 
 const ButtonContainer = styled.div`
@@ -119,25 +117,15 @@ function HeroLayout() {
   return (
     <StyledLayout>
       <Sidebar>
-        <div>
-          <Header>About</Header>
-        </div>
-        <div>
-          <StyledParagraph type="primary">
-            Dust off those travel memories! "Traveller" isn't your grandma's
-            photo album. It's your personal portal to relive adventures,
-            rediscover hidden gems, and curate a travelogue that sparks joy (and
-            maybe inspires your next escape!). Map your journeys, pin
-            unforgettable moments, and let Traveller be your digital passport to
-            a world of memories. It's your adventure, your way😁✈️
-          </StyledParagraph>
-        </div>
-
-        <ButtonContainer>
-          <Button>Travel begins here</Button>
-          <Button>learn more</Button>
-        </ButtonContainer>
-        <StyledParagraph>i dont know how to do that yet!!!</StyledParagraph>
+        <Header>About</Header>
+        <StyledParagraph type="primary">
+          Dust off those travel memories! "Traveller" isn't your grandma's photo
+          album. It's your personal portal to relive adventures, rediscover
+          hidden gems, and curate a travelogue that sparks joy (and maybe
+          inspires your next escape!). Map your journeys, pin unforgettable
+          moments, and let Traveller be your digital passport to a world of
+          memories. It's your adventure, your way😁✈️
+        </StyledParagraph>
       </Sidebar>
       <ImageContainer>
         <Images>

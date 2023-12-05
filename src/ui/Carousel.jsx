@@ -7,35 +7,28 @@ import {
   useCallback,
 } from "react";
 import styled, { css } from "styled-components";
-import TopCityList from "./TopCityList";
 
 //color-main: #087f5b
 //grey color: #343a40
 // #ffc300
 
-const ParagraphStyles = {
+const styles = {
   large: css`
-    font-size: 18px;
-    font-weight: 500;
-    line-height: 1.5;
-    margin-bottom: 32px;
-    color: #e6fcf5;
+    /* background-color: red; */
+    font-size: large;
+    font-weight: 900;
+    margin-bottom: 0.5rem;
   `,
   medium: css`
-    font-size: 14px;
-    margin-bottom: 4px;
-    color: #e6fcf5;
+    font-size: small;
   `,
-  small: css`
-    font-size: 12px;
-    color: #e6fcf5;
-  `,
+  small: css``,
 };
 
 const StyledCarousel = styled.div`
   display: flex;
-  gap: 2rem;
-  background-color: #c8d9eb;
+  grid-gap: 3rem;
+  background-color: #678d77;
   width: 800px;
   height: 400px;
   margin: 100px auto;
@@ -51,7 +44,8 @@ const StyledCarousel = styled.div`
   z-index: 0;
 `;
 const StyledImage = styled.img`
-  height: 250px;
+  max-height: 250px;
+  max-width: 250px;
   border-radius: 8px;
   transform: scale(1.1);
   box-shadow: 0px 12px 24px rgba(0, 0, 0, 0.1);
@@ -61,25 +55,33 @@ const StyledImage = styled.img`
     transform: scale(1.4);
     z-index: 0;
     cursor: pointer;
+    backdrop-filter: blur(8px);
   }
 `;
 
 const StyledBlockQoute = styled.blockquote`
   display: flex;
   flex-direction: column;
-  transition: all 0.3s;
-  color: black;
-  &:hover {
-    transform: scale(1.1) translateX(90px) translateY(-50px);
-    cursor: pointer;
-    font-size: 16px;
-    z-index: 4;
-    color: #ffc300;
-  }
 `;
 
 const StyledParagraph = styled.p`
-  ${(props) => ParagraphStyles[props.paragraphstyle]}
+  color: white;
+  transition: all 0.3s;
+
+  ${(props) => styles[props.paragraphstyles]}
+
+  ${(props) =>
+    props.type === "middle" &&
+    css`
+      &:hover {
+        transform: scale(1.1) translateX(90px) translateY(-50px);
+        cursor: pointer;
+        font-size: 16px;
+        z-index: 4;
+        color: #ffc300;
+        backdrop-filter: blur(8px);
+      }
+    `}
 `;
 
 const StyledArrowButton = styled.button`
@@ -128,7 +130,7 @@ function Carousel({ children }) {
 
   let intervalId = useRef(null);
 
-  console.log(index);
+  // console.log(index);
 
   const startInterval = useCallback(() => {
     intervalId.current = setInterval(() => {

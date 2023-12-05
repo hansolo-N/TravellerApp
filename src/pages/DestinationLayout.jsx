@@ -28,7 +28,7 @@ function DestinationLayout() {
         </DestinationNav>
       </DestinationSidebar>
       <MainPage>
-        <Header>Destinations</Header>
+        <Header>Destinations 🌍</Header>
         <Destinations />
       </MainPage>
     </StyledLayout>

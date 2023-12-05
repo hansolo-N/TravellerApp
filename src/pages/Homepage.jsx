@@ -1,11 +1,15 @@
 import styles from "./Homepage.module.css";
 import { Link } from "react-router-dom";
 import NavPage from "../components/NavPage";
+import { useLogout } from "../authentication/useLogout";
 export default function Homepage() {
+  const { isLoading, logout } = useLogout();
+
   return (
     <main className={styles.homepage}>
       <NavPage />
       <section>
+        <button>logout</button>
         <h1>
           Your adventure starts here!
           <br />

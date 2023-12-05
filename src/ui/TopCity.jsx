@@ -1,5 +1,5 @@
 import { StyledBlockQoute, StyledImage, StyledParagraph } from "../ui/Carousel";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { CountryFlag } from "./MainPage";
 
 const StyledTopCity = styled.div`
@@ -24,6 +24,33 @@ const StyledTopCity = styled.div`
   }
 `;
 
+const Fact = styled.div`
+  margin-top: 5px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+
+  ${(props) =>
+    props.type === "bottom" &&
+    css`
+      &:hover {
+        transform: scale(1.1) translateX(90px) translateY(50px);
+        cursor: pointer;
+        font-size: 16px;
+        z-index: 4;
+        color: red;
+        backdrop-filter: blur(4px);
+      }
+    `}
+`;
+
+const Emoji = styled.span`
+  font-family: "Noto Color Emoji", sans-serif;
+  display: inline;
+  margin-left: 0.2rem;
+  padding: 1rem;
+`;
+
 function TopCity({ cities, index }) {
   console.log(cities.emoji);
 
@@ -38,7 +65,15 @@ function TopCity({ cities, index }) {
         <StyledParagraph paragraphstyles="medium" type="middle">
           {cities.at(index).description}
         </StyledParagraph>
-        <StyledParagraph>{cities.at(index).Fact}</StyledParagraph>
+        <Fact type="bottom">
+          <StyledParagraph paragraphstyles={"large"}>
+            Fact
+            <Emoji>🧠</Emoji>
+          </StyledParagraph>
+          <StyledParagraph paragraphstyles={"medium"} type="bottom">
+            {cities.at(index).Fact}
+          </StyledParagraph>
+        </Fact>
       </StyledBlockQoute>
     </StyledTopCity>
   );

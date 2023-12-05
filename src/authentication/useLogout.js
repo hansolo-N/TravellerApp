@@ -11,7 +11,7 @@ export function useLogout() {
     mutationKey: ["user"],
     onSuccess: () => {
       queryClient.removeQueries();
-      navigate("/login", { replace: true });
+      navigate("/", { replace: true });
     },
     onError: {},
   });

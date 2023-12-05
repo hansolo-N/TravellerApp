@@ -18,8 +18,8 @@ const Header = styled.h1`
   font-weight: 500;
   animation-name: slideIn;
   animation-duration: 3s;
-  animation-delay: 1.5s;
-  animation-timing-function: ease-in;
+  /* animation-delay: 1.5s; */
+  animation-timing-function: ease-in-out;
 
   @keyframes slideIn {
     0% {

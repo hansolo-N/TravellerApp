@@ -79,7 +79,24 @@ const StyledParagraph = styled.p`
         font-size: 16px;
         z-index: 4;
         color: #ffc300;
-        backdrop-filter: blur(8px);
+        backdrop-filter: blur(5px);
+      }
+    `}
+
+    ${(props) =>
+    props.type === "bottom" &&
+    css`
+      font-size: 13px;
+      font-weight: 700;
+      color: #fdebd0;
+      border: 2px solid white;
+      border-radius: 5px;
+      padding: 0.3rem;
+      &:hover {
+        cursor: pointer;
+        font-size: 16px;
+        z-index: 4;
+        color: #ffc300;
       }
     `}
 `;

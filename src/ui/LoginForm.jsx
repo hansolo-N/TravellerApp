@@ -4,8 +4,8 @@ import { useForm } from "react-hook-form";
 import FormRow from "../ui/FormRow";
 import Input from "../ui/Input";
 import styled from "styled-components";
-import { useNavigate } from "react-router-dom";
-import { useLogin } from "../hooks/useLogin";
+import { Link } from "react-router-dom";
+import { useLogin } from "../authentication/useLogin";
 
 const LoginContainer = styled.div`
   display: flex;
@@ -19,17 +19,10 @@ function LoginForm() {
 
   const { register, formState, handleSubmit } = useForm();
 
-  const navigate = useNavigate();
-
   const { errors } = formState;
 
   function onSubmit({ password, email }) {
     login({ password, email });
-  }
-
-  function handleSignUp(e) {
-    e.preventDefault();
-    navigate("/signup");
   }
 
   return (
@@ -51,10 +44,10 @@ function LoginForm() {
           />
         </FormRow>
         <FormRow>
-          <button>Login</button>
+          <button disabled={isLoading}>Login</button>
         </FormRow>
         <FormRow>
-          <button onClick={handleSignUp}>SignUp</button>
+          <Link to="/signup">SignUp</Link>
         </FormRow>
       </Form>
     </LoginContainer>

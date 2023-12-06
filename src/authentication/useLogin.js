@@ -12,8 +12,9 @@ export function useLogin() {
     mutationFn: ({ email, password }) => LoginSupabase({ email, password }),
     mutationKey: ["login"],
     onSuccess: (user) => {
+      toast.success("Logged in!");
       queryClient.setQueriesData(["user"], user);
-      navigate("/dashboard", { replace: true });
+      navigate("/app", { replace: true });
     },
     onError: (err) => {
       console.log("Error", err);

@@ -52,8 +52,6 @@ const Emoji = styled.span`
 `;
 
 function TopCity({ cities, index }) {
-  console.log(cities.emoji);
-
   return (
     <StyledTopCity>
       <StyledImage src={cities.at(index).cityImage} />

@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 
 const StyledLogo = styled.div`
   padding: 0.5rem 0.5rem;
+  transition: all 0.5s ease-in;
 
   &:hover {
     transform: translate3d(0, 10px, 5px);

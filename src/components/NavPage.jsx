@@ -3,28 +3,35 @@ import styles from "./NavPage.module.css";
 import Logo from "./Logo";
 import styled from "styled-components";
 import { useUser } from "../authentication/useUser";
-import { useLogin } from "../authentication/useLogin";
 import { useLogout } from "../authentication/useLogout";
+import UserAvatar from "../ui/UserAvatar";
+
+const StyledButton = styled.button`
+  font-weight: 900;
+  font-size: medium;
+  text-transform: uppercase;
+  transition: all 1s ease-in-out;
+  &:hover {
+    color: red;
+  }
+`;
 
 function NavPage() {
-  const { login, isLoading: LoggingIn } = useLogin();
-
   const { logout, isLoading: loggingOut } = useLogout();
 
-  const { isAuthenticated, isLoading } = useUser();
+  const { isAuthenticated } = useUser();
 
-  function Access() {
-    if (isAuthenticated)
-      return (
-        <button disabled={loggingOut} onClick={logout}>
-          Logout
-        </button>
-      );
+  function handleLogout() {
+    if (window.confirm("Are you sure you want to logout?")) {
+      logout();
+    }
+  }
 
+  function Button() {
     return (
-      <button disabled={LoggingIn} onClick={login}>
-        Login
-      </button>
+      <StyledButton disabled={loggingOut} onClick={handleLogout}>
+        Logout
+      </StyledButton>
     );
   }
 
@@ -32,6 +39,11 @@ function NavPage() {
     <nav className={styles.nav}>
       <Logo />
       <ul>
+        {isAuthenticated && (
+          <li>
+            <UserAvatar />
+          </li>
+        )}
         <li>
           <NavLink to="/destinations">Destinations</NavLink>
         </li>
@@ -41,11 +53,13 @@ function NavPage() {
         <li>
           <NavLink to="/signup">Sign Up</NavLink>
         </li>
-        <li>
-          <NavLink to="/login" className={styles.ctaLink}>
-            <Access />
-          </NavLink>
-        </li>
+        {isAuthenticated ? (
+          <Button />
+        ) : (
+          <li>
+            <NavLink to="/login">Login</NavLink>
+          </li>
+        )}
       </ul>
     </nav>
   );

@@ -17,12 +17,10 @@ function ProtectedRoute({ children }) {
 
   const { isAuthenticated, isLoading } = useUser();
 
-  console.log(isAuthenticated);
-
   useEffect(
     function () {
       if (!isAuthenticated && !isLoading) {
-        navigate("/login");
+        // navigate("/login");
       }
     },
     [isAuthenticated, isLoading, navigate]

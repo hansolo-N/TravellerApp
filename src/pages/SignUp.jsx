@@ -22,7 +22,11 @@ export default function SignUp() {
     <main className={styles.login}>
       <NavPage />
       <Form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
-        <FormRow label="full Name" className={styles.row}>
+        <FormRow
+          label="full Name"
+          className={styles.row}
+          error={errors?.fullName?.message}
+        >
           <Input
             type="text"
             id="fullName"
@@ -30,7 +34,11 @@ export default function SignUp() {
           />
         </FormRow>
 
-        <FormRow label="email" className={styles.row}>
+        <FormRow
+          label="email"
+          className={styles.row}
+          error={errors?.fullName?.message}
+        >
           <Input
             type="email"
             id="email"
@@ -38,7 +46,11 @@ export default function SignUp() {
           />
         </FormRow>
 
-        <FormRow label="password" className={styles.row}>
+        <FormRow
+          label="password"
+          className={styles.row}
+          error={errors?.fullName?.message}
+        >
           <Input
             type="password"
             id="password"
@@ -46,7 +58,11 @@ export default function SignUp() {
           />
         </FormRow>
 
-        <FormRow label="passwordConfirm" className={styles.row}>
+        <FormRow
+          label="passwordConfirm"
+          className={styles.row}
+          error={errors?.fullName?.message}
+        >
           <Input
             type="password"
             id="passwordConfirm"

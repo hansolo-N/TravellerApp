@@ -17,7 +17,7 @@ const Label = styled.label`
 
 const Error = styled.span`
   font-size: 1.4rem;
-  color: var(--color-red-700);
+  color: red;
 `;
 
 function FormRow({ label, children, error }) {

@@ -12,6 +12,54 @@ const LoginContainer = styled.div`
   justify-content: center;
   align-items: center;
   margin-top: 20px;
+  border: none;
+`;
+
+const StyledForm = styled(Form)`
+  display: flex;
+  flex-direction: column;
+  border: none;
+  border-radius: 5px;
+  background-color: #3a9679;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+`;
+
+const StyledLink = styled(Link)`
+  font-size: 1.5rem;
+  font-weight: 700;
+  font-family: "Roboto", sans-serif;
+  border: none;
+  border-radius: 5px;
+  color: #152744;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+
+  &:hover {
+    text-decoration: underline;
+    transform: scale(1.2);
+  }
+`;
+
+const Button = styled.button`
+  font-size: 1.8rem;
+  font-weight: 700;
+  font-family: "Roboto", sans-serif;
+  background-color: #a7cd78;
+  padding: 0.3rem 0.3rem;
+  margin-bottom: 1rem;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  transition: all 0.5s ease-in;
+
+  &:hover {
+    background-color: #01352c;
+    transform: scale(1.1);
+  }
 `;
 
 function LoginForm() {
@@ -27,29 +75,33 @@ function LoginForm() {
 
   return (
     <LoginContainer>
-      <Form onSubmit={handleSubmit(onSubmit)}>
-        <FormRow label="email">
+      <StyledForm onSubmit={handleSubmit(onSubmit)}>
+        <FormRow label="email" error={errors?.passwordConfirm?.message}>
           <Input
-            type="text"
+            type="email"
             id="email"
-            {...register("email", { required: "this field is required" })}
+            {...register("email", {
+              required: "this field is required",
+              pattern: {
+                value: /\S+@\S+\.\S+/,
+                message: "provide a valid email address",
+              },
+            })}
           />
         </FormRow>
 
-        <FormRow label="password">
+        <FormRow label="password" error={errors?.passwordConfirm?.message}>
           <Input
             type="password"
             id="password"
             {...register("password", { required: "this field is required" })}
           />
         </FormRow>
-        <FormRow>
-          <button disabled={isLoading}>Login</button>
-        </FormRow>
-        <FormRow>
-          <Link to="/signup">SignUp</Link>
-        </FormRow>
-      </Form>
+
+        <Button disabled={isLoading}>Login</Button>
+
+        <StyledLink to="/signup">want to sign up?!</StyledLink>
+      </StyledForm>
     </LoginContainer>
   );
 }

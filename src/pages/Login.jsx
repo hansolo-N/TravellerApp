@@ -12,15 +12,11 @@ const PageContainer = styled.div`
   align-items: center;
 `;
 
-const FormContainer = styled.div``;
-
 function Login() {
   return (
     <PageContainer>
       <Logo />
-      <FormContainer>
-        <LoginForm />
-      </FormContainer>
+      <LoginForm />
     </PageContainer>
   );
 }

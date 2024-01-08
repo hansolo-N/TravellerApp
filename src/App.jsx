@@ -1,5 +1,11 @@
 import React from "react";
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+  Navigate,
+  Outlet,
+} from "react-router-dom";
 import About from "./pages/About";
 import Homepage from "./pages/Homepage";
 import City from "./components/City";
@@ -17,6 +23,7 @@ import { Toaster } from "react-hot-toast";
 import DestinationLayout from "./pages/DestinationLayout";
 import DestinationForm from "./components/DestinationForm";
 import Destinations from "./pages/Destinations";
+import Flights from "./ui/Flights";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -35,7 +42,9 @@ function Traveller() {
           <Route index element={<Homepage />} />
           <Route path="about" element={<About />} />
           <Route path="destinations" element={<DestinationLayout />}>
-            <Route path="destination" element={<Destinations />} />
+            <Route index element={<Navigate replace to="topcities" />} />
+            <Route path="topcities" element={<Destinations />} />
+            <Route path="flights" element={<Flights />} />
             <Route path="destinationform" element={<DestinationForm />} />
           </Route>
           <Route

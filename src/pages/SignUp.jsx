@@ -1,11 +1,59 @@
 import styles from "./Login.module.css";
 import NavPage from "../components/NavPage";
-import Button from "../components/StyledButton";
 import Form from "../ui/Form";
 import FormRow from "../ui/FormRow";
 import Input from "../ui/Input";
 import { useForm } from "react-hook-form";
 import { useSignUpUser } from "../hooks/useSignUpUser";
+import styled from "styled-components";
+import { Link } from "react-router-dom";
+
+const StyledForm = styled(Form)`
+  display: flex;
+  flex-direction: column;
+  border: none;
+  border-radius: 5px;
+  background-color: #3a9679;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+`;
+
+const StyledLink = styled(Link)`
+  font-size: 1.5rem;
+  font-weight: 700;
+  font-family: "Roboto", sans-serif;
+  border: none;
+  border-radius: 5px;
+  color: #152744;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+
+  &:hover {
+    text-decoration: underline;
+    transform: scale(1.2);
+  }
+`;
+
+const Button = styled.button`
+  font-size: 1.8rem;
+  font-weight: 700;
+  font-family: "Roboto", sans-serif;
+  background-color: #a7cd78;
+  padding: 0.3rem 0.3rem;
+  margin-bottom: 1rem;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  transition: all 0.5s ease-in;
+
+  &:hover {
+    background-color: #01352c;
+    transform: scale(1.1);
+  }
+`;
 
 export default function SignUp() {
   const { register, formState, handleSubmit, reset } = useForm();
@@ -21,12 +69,8 @@ export default function SignUp() {
   return (
     <main className={styles.login}>
       <NavPage />
-      <Form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
-        <FormRow
-          label="full Name"
-          className={styles.row}
-          error={errors?.fullName?.message}
-        >
+      <StyledForm className={styles.form} onSubmit={handleSubmit(onSubmit)}>
+        <FormRow label="full Name" error={errors?.fullName?.message}>
           <Input
             type="text"
             id="fullName"
@@ -34,11 +78,7 @@ export default function SignUp() {
           />
         </FormRow>
 
-        <FormRow
-          label="email"
-          className={styles.row}
-          error={errors?.fullName?.message}
-        >
+        <FormRow label="email" error={errors?.fullName?.message}>
           <Input
             type="email"
             id="email"
@@ -46,11 +86,7 @@ export default function SignUp() {
           />
         </FormRow>
 
-        <FormRow
-          label="password"
-          className={styles.row}
-          error={errors?.fullName?.message}
-        >
+        <FormRow label="password" error={errors?.fullName?.message}>
           <Input
             type="password"
             id="password"
@@ -58,11 +94,7 @@ export default function SignUp() {
           />
         </FormRow>
 
-        <FormRow
-          label="passwordConfirm"
-          className={styles.row}
-          error={errors?.fullName?.message}
-        >
+        <FormRow label="passwordConfirm" error={errors?.fullName?.message}>
           <Input
             type="password"
             id="passwordConfirm"
@@ -71,11 +103,9 @@ export default function SignUp() {
             })}
           />
         </FormRow>
-
-        <FormRow>
-          <Button onClick={handleSubmit}>Sign Up</Button>
-        </FormRow>
-      </Form>
+        <Button onClick={handleSubmit}>Sign Up</Button>
+        <StyledLink to="/login">already a user?</StyledLink>
+      </StyledForm>
     </main>
   );
 }

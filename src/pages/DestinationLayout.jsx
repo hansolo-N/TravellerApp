@@ -5,7 +5,7 @@ import { HiOutlineGlobe } from "react-icons/hi";
 import { HiOutlinePaperAirplane } from "react-icons/hi2";
 import styled from "styled-components";
 import Logo from "../components/Logo";
-import { Outlet } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 import Destinations from "./Destinations";
 import MainPage from "../ui/MainPage";
 import { Header } from "../ui/MainPage";
@@ -21,15 +21,24 @@ function DestinationLayout() {
     <StyledLayout>
       <DestinationSidebar>
         <Logo />
-        <Outlet />
         <DestinationNav>
-          <ListItem linkname="flights" icon={<HiOutlinePaperAirplane />} />
-          <ListItem linkname="Destinations" icon={<HiOutlineGlobe />} />
+          <ListItem
+            link="flights"
+            linkname="flights"
+            icon={<HiOutlinePaperAirplane />}
+          />
+
+          <ListItem
+            link="topcities"
+            linkname="Top-Cities"
+            icon={<HiOutlineGlobe />}
+          />
         </DestinationNav>
       </DestinationSidebar>
       <MainPage>
         <Header>Destinations 🌍</Header>
-        <Destinations />
+        <Outlet />
+        {/* <Destinations /> */}
       </MainPage>
     </StyledLayout>
   );
